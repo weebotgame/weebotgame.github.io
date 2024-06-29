@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>p5 game</title>
+</head>
+<body>
+
+    <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.js"></script>
+
+    <script>
+        y = 0;
+        x = 0;
+
+        w_key = 87;
+        a_key = 65
+        s_key = 83;
+        d_key = 68;
+
+        hue;
+
+        function setup() {
+            canvasWidth = 800;
+            canvasHeight = 480;
+            canvas = createCanvas(canvasWidth, canvasHeight);
+            canvas.position(windowWidth/2 - canvasWidth/2, windowHeight/2 - canvasHeight/2);
+
+            
+            colorMode(HSB, 100);
+            noSmooth();
+
+            background(86);
+            hue = 0;
+        }
+
+        function draw()
+        {
+            g = createGraphics(canvasWidth/4, canvasHeight/4)
+
+            hue += 1;
+
+            if (hue > 100) hue = 0;
+
+            g.fill(color(hue, 100, 100));
+            g.noStroke()
+            g.rect(x, y, 20, 1);
+        
+            if (keyIsDown(w_key))
+            {
+                y -= 1;
+            }
+            if (keyIsDown(s_key))
+            {
+                y += 1;
+            }
+            if (keyIsDown(a_key))
+            {
+                x -= 1;
+            }
+            if (keyIsDown(d_key))
+            {
+                x += 1;
+            }
+
+            image(g, 0, 0, canvasWidth, canvasHeight);
+
+            if (key === "r")
+            {
+                background(86);
+            }
+        }
+    </script>
+</body>
+</html>
