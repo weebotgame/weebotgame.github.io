@@ -2,72 +2,116 @@
 <html>
 <head>
     <title>Weebot game</title>
+
+    <style>
+        .button {
+            margin: auto;
+            display:block;
+            width: 120px;
+            height: 60px;
+
+            background-color: white; /* Green */
+            border: 5px solid black;
+            border-radius: 20px;
+
+            box-shadow: 8px 8px;
+            
+            font-family: Gilroy;
+            font-size: 16px;
+
+            cursor:pointer;
+
+            transition-duration: 0.1s;
+        }
+
+        .button:hover {
+            transform: translateY(-1px) translateX(-1px);
+            box-shadow: 9px 9px;
+        }
+
+        .button:active {
+            transform: translateY(4px) translateX(4px);
+            box-shadow: 4px 4px;
+        }
+
+        .sl_toggle {
+            height: 50px;
+        }
+
+        .slider {
+            -webkit-appearance: none;
+            appearance: none;
+
+            display:block;
+            margin: auto;
+            width: 20%;
+            height: 25px;
+
+            border-radius: 20px;
+
+            background: #d3d3d3;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none; /* Override default look */
+            appearance: none;
+            width: 20px; /* Set a specific slider handle width */
+            height: 20px; /* Slider handle height */
+            background: white;
+
+            outline: 5px solid black;
+            border-radius: 20px;
+
+            cursor: pointer; /* Cursor on hover */
+        }
+        
+        .slider::-moz-range-thumb {
+            width: 25px; /* Set a specific slider handle width */
+            height: 25px; /* Slider handle height */
+            background: #04AA6D; /* Green background */
+            cursor: pointer; /* Cursor on hover */
+        }
+
+        @font-face {
+            font-family: Gilroy;
+            src: url('GILROY-BLACK.TTF') format('woff');
+        }
+
+        .text {
+            display:block;
+            margin: auto;
+            
+            text-align: center;
+
+            font-family: Gilroy;
+        }
+
+        .p5Canvas {
+            display:block;
+            margin: auto;
+        }
+    </style>
 </head>
 <body>
 
+    <button id="toggle" class="button sl_toggle" onclick="square = !square; document.getElementById('toggle').textContent = square ? 'Square' : 'Line' ">Square</button>
+    
+    <br>
+    
+    <p class="text">Speed</p>
+    <input type="range" min="1" max="40" value="2" class="slider" id="speed" oninput="speed = parseInt(this.value)">
+
+    <br>
+
+    <main></main>
+
+    <br>
+
+    <button class="button" onclick="reset()">Reset</button>
+    <button class="button" onclick="save()">Save</button>
+
     <script src="https://cdn.jsdelivr.net/npm/p5@1.9.4/lib/p5.js"></script>
 
-    <script>
-        y = 0;
-        x = 0;
-
-        w_key = 87;
-        a_key = 65
-        s_key = 83;
-        d_key = 68;
-
-        hue;
-
-        function setup() {
-            canvasWidth = 800;
-            canvasHeight = 480;
-            canvas = createCanvas(canvasWidth, canvasHeight);
-            canvas.position(windowWidth/2 - canvasWidth/2, windowHeight/2 - canvasHeight/2);
-
-            
-            colorMode(HSB, 100);
-            noSmooth();
-
-            background(86);
-            hue = 0;
-        }
-
-        function draw()
-        {
-            g = createGraphics(canvasWidth/4, canvasHeight/4)
-
-            hue += 1;
-
-            if (hue > 100) hue = 0;
-
-            g.fill(color(hue, 100, 100));
-            g.noStroke()
-            g.rect(x, y, 20, 1);
-        
-            if (keyIsDown(w_key))
-            {
-                y -= 1;
-            }
-            if (keyIsDown(s_key))
-            {
-                y += 1;
-            }
-            if (keyIsDown(a_key))
-            {
-                x -= 1;
-            }
-            if (keyIsDown(d_key))
-            {
-                x += 1;
-            }
-
-            image(g, 0, 0, canvasWidth, canvasHeight);
-
-            if (key === "r")
-            {
-                background(86);
-            }
-        }
-    </script>
+    <script src="game.js"></script>
 </body>
 </html>
