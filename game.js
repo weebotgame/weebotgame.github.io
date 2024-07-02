@@ -5,16 +5,18 @@
         y = canvasHeight/2;
 
         w_key = 87;
-        a_key = 65
+        a_key = 65;
         s_key = 83;
         d_key = 68;
 
         var hue;
 
-        velocityX;
-        velocityY;
+        var velocityX;
+        var velocityY;
 
         var canvas;
+
+        bcolor = 90;
 
         function setup() {
             canvas = createCanvas(canvasWidth, canvasHeight);
@@ -24,7 +26,7 @@
             g.colorMode(HSB, 100);
             noSmooth();
 
-            background(88);
+            background(bcolor);
             hue = 0;
 
             square = true;
@@ -33,8 +35,6 @@
 
         function draw()
         {
-            console.log(speed);
-
             hue += 1;
 
             if (hue > 100) hue = 0;
@@ -99,7 +99,7 @@
 
         function reset()
         {
-            g.background(88);
+            g.background(bcolor);
         }
 
         function save()
